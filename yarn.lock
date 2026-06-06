@@ -2122,6 +2122,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/swc-wasm-nodejs@npm:~15.2.3":
+  version: 15.2.5
+  resolution: "@next/swc-wasm-nodejs@npm:15.2.5"
+  checksum: 0095ba26602b53adbd4b07dc09433771ed39017fbc8e28543a108ae27402042b5dbb55f2856de2a36bc58e97da0e941aed1ada1fcd30ba18f3f4278cf59fdf8c
+  languageName: node
+  linkType: hard
+
 "@next/swc-win32-arm64-msvc@npm:15.2.5":
   version: 15.2.5
   resolution: "@next/swc-win32-arm64-msvc@npm:15.2.5"
@@ -2928,6 +2935,7 @@ __metadata:
   resolution: "@se-2/nextjs@workspace:packages/nextjs"
   dependencies:
     "@heroicons/react": ~2.1.5
+    "@next/swc-wasm-nodejs": ~15.2.3
     "@rainbow-me/rainbowkit": 2.2.7
     "@tailwindcss/postcss": 4.0.15
     "@tanstack/react-query": ~5.59.15
@@ -10079,6 +10087,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"monad-mining-registry@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "monad-mining-registry@workspace:."
+  dependencies:
+    husky: ~9.1.6
+    lint-staged: ~13.2.2
+  languageName: unknown
+  linkType: soft
+
 "mri@npm:1.2.0, mri@npm:^1.1.0":
   version: 1.2.0
   resolution: "mri@npm:1.2.0"
@@ -12184,15 +12201,6 @@ __metadata:
   checksum: b7c7d1a68d6ca946f2fbb0778e0c4ec63c65501b54023b2af7d7e9f48fdb6c6580d6f7675cd53bda5944c5ebc057560d5a6365079752546865defb3b79dea454
   languageName: node
   linkType: hard
-
-"se-2@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "se-2@workspace:."
-  dependencies:
-    husky: ~9.1.6
-    lint-staged: ~13.2.2
-  languageName: unknown
-  linkType: soft
 
 "semver@npm:6.3.1, semver@npm:^6.0.0, semver@npm:^6.3.1":
   version: 6.3.1
