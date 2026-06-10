@@ -1,83 +1,109 @@
-# Monad Mining Registry
+# 🚀 Termux Monad Mining Contracts
 
-> Expediente digital **inmutable** de títulos mineros bajo las normas internacionales **NI 43-101** (Canadá) y **ECRR 2018** (Colombia).
->
-> Convertimos meses de *due diligence* minero en segundos de verificación: la certificación técnica de un yacimiento deja de ser un PDF falsificable y pasa a ser una **firma criptográfica inmutable** de un geólogo certificado, validada bajo norma.
+<p align="center">
+  <img src="https://img.shields.io/badge/Environment-Termux%20on%20Android-orange?style=for-the-badge&logo=android&logoColor=white" alt="Termux" />
+  <img src="https://img.shields.io/badge/Blockchain-Monad%20Testnet-blueviolet?style=for-the-badge" alt="Monad Blockchain" />
+  <img src="https://img.shields.io/badge/Framework-Foundry-FF3E3E?style=for-the-badge&logo=solidity&logoColor=white" alt="Foundry" />
+  <img src="https://img.shields.io/badge/Language-Solidity%20^0.8.20-363636?style=for-the-badge&logo=solidity&logoColor=white" alt="Solidity" />
+</p>
+
+> [!NOTE]
+> **Todo este proyecto, incluyendo la conexión a la blockchain y el despliegue de los smart contracts, ha sido ejecutado íntegramente desde la terminal Termux con Android.** 📱⚙️
 
 ---
 
-## 🛑 El problema
+## 🛡️ Desarrollo Pionero (Mobile-First)
 
-La inversión en minería a gran y mediana escala (clave para la transición energética — cobre, litio) se frena por la **opacidad**:
+> [!IMPORTANT]
+> **Despliegue EVM Pionero desde Termux con Android**  
+> Este proyecto es pionero en su enfoque: **representa una conexión a la blockchain y un despliegue de smart contracts ejecutado íntegramente desde un smartphone a través de la terminal Termux con Android**. 
+>
+> Sin necesidad de ordenadores tradicionales ni servidores en la nube, todo el ciclo de desarrollo —desde la escritura de código, tests locales de Foundry, generación de credenciales criptográficas, conexión a los nodos remotos y transmisión de las transacciones firmadas a la red de **Monad Testnet**— se gestionó directamente desde un dispositivo móvil. 📲
 
-- Verificar si un título minero es legítimo y si los datos de perforación son reales toma **3–6 meses** de auditoría legal y geológica (ej. fondos en la bolsa de Toronto, TSX).
-- Las bases de datos estatales están desactualizadas.
-- Los reportes técnicos viven en **PDFs fácilmente falsificables**.
-- Riesgo de linderos superpuestos con reservas ambientales o títulos preexistentes.
+---
 
-## ✅ La solución
+## 📱 Entorno de Ejecución (Termux Mobile Sandbox)
 
-Un registro on-chain donde la **cadena de custodia de la verdad técnica** es verificable por cualquiera, al instante:
+La infraestructura local del proyecto está diseñada para correr directamente bajo la terminal de **Termux** en Android, lo que permite lograr un entorno portátil y ultraeficiente:
 
-1. **Solo una Persona Calificada (QP) certificada** —en lista blanca— puede firmar, con su billetera → **responsabilidad legal inmutable on-chain**.
-2. Cada título es un **NFT dinámico** cuya clasificación de recurso (Inferido → Indicado → Medido) **solo puede avanzar si la norma lo permite** (regla codificada en el contrato).
-3. El inversor **verifica en segundos**, sin intermediarios.
+* 🛠️ **Compilador Solidity (Solc):** Compilación ultra-rápida gestionada nativamente por Foundry.
+* 🧪 **Testing Engine:** Ejecución instantánea de tests unitarios en la EVM local integrada de Foundry.
+* 🔑 **Criptografía local:** Generación y descifrado seguro de keystores con scripts locales en Node.js, aislando las llaves privadas en el almacenamiento del dispositivo.
 
-## 📜 El contrato: `MiningRegistry`
+---
 
-ERC-721 construido sobre OpenZeppelin. Las normas codificadas como reglas on-chain:
+## 🔗 Conexión a la Blockchain (Monad Testnet)
 
-| Elemento | Rol |
-|---|---|
-| `enum Standard { NI_43_101, ECRR_2018 }` | Norma aplicada (Canadá / Colombia) |
-| `enum ResourceCategory { INFERRED, INDICATED, MEASURED }` | Escalera de clasificación CRIRSCO (Recurso Inferido/Indicado/Medido) |
-| `whitelistedQP` | Solo Personas Calificadas certificadas pueden firmar |
+El proyecto está configurado para enlazarse con los nodos de la red **Monad Testnet**, optimizando los límites de gas y compatibilidad EVM. Puedes ver la configuración detallada en [foundry.toml](file:///data/data/com.termux/files/home/Projects/termux-monad-mining-contracts/foundry.toml):
 
-**Funciones:**
-- `whitelistQP(address)` — *(owner)* autoriza a una Persona Calificada.
-- `registerCertificate(...)` — *(QP)* registra un título y lo mintea como NFT, fijando al firmante (`qp`) como responsable legal.
-- `advanceCategory(tokenId, newCategory)` — *(QP)* avanza la clasificación **solo un nivel hacia adelante** (la norma como regla: prohíbe saltar o retroceder).
-- `getCertificate(tokenId)` — lectura pública para auditoría.
+* **🌐 Endpoint RPC:** `https://testnet-rpc.monad.xyz/`
+* **🆔 Chain ID:** `10143`
+* **🔍 Explorador de Bloques:** Integración con Blockscout / Monad Explorer.
 
-## 🔗 Desplegado y verificado en Monad Testnet
-
-| | |
-|---|---|
-| **Contrato** | `0x21d2f82d8aa4e33e55a0b60b12ce0c334c387e6d` |
-| **Red** | Monad Testnet (chainId `10143`) |
-| **MonadVision** | https://testnet.monadvision.com/address/0x21d2f82d8aa4e33e55a0b60b12ce0c334c387e6d |
-| **MonadScan** | https://testnet.monadscan.com/address/0x21d2f82d8aa4e33e55a0b60b12ce0c334c387e6d |
-| **Tx de demo (certificado #1)** | `0x5c36987fc7d60c58c1c7e68eebad284f5cb7684212231f9e3b7b8bee4f7ecc0a` |
-
-Código fuente **verificado** en ambos exploradores ✅
-
-## 🧱 Stack
-
-- **Blockchain:** Monad (L1 EVM-compatible, 10k TPS, finalidad ~800ms, gas ~$0.00004/tx)
-- **Contratos:** Solidity `^0.8.28` + Foundry + OpenZeppelin
-- **Scaffold:** scaffold-eth-2 (Foundry) — página *Debug Contracts* como UI de demo
-
-## 🚀 Cómo correr
-
+Puedes interactuar con la blockchain directamente desde la terminal de Termux usando comandos de `cast`:
 ```bash
-# Contratos (dentro de packages/foundry)
-forge build
-forge test
+# Consultar balance de una cuenta en la testnet
+cast balance <TU_DIRECCION> --rpc-url monad_testnet
 
+<<<<<<< Updated upstream
+# Ver el último número de bloque minado
+cast block-number --rpc-url monad_testnet
+=======
 # Deploy a Monad testnet
 yarn deploy --network monad_testnet --keystore <tu-keystore>
 
 # UI de demo (Debug Contracts)
-yarn start   # -> http://localhost:3000
+./start.sh   # -> http://localhost:3000 (usa start.sh en Termux para evitar errores de concurrencia de Yarn)
+>>>>>>> Stashed changes
 ```
-
-## 🗺️ Roadmap
-
-- **Capa de IA (off-chain):** auditor geoespacial (SIG) que cruza shapefiles/GeoJSON contra reservas ambientales; auditor matemático de ensayes que valida estadísticamente la clasificación NI 43-101.
-- **Declaración de Reservas** (Probable/Probada) y NFT soulbound.
-- **Frontend** dedicado (dashboard QP + herramienta de auditoría para inversores).
-- **Indexer** (Envio HyperIndex) para feed histórico de certificaciones.
 
 ---
 
-*MVP construido para hackathon. Las normas NI 43-101 (Canadá) y ECRR 2018 (Colombia) son el núcleo: el contrato las hace cumplir automáticamente.*
+## 🛠️ Despliegue de Contratos Inteligentes
+
+El despliegue de [MiningRegistry.sol](file:///data/data/com.termux/files/home/Projects/termux-monad-mining-contracts/contracts/MiningRegistry.sol) se realiza mediante scripts en Solidity ejecutados por Foundry.
+
+### 📋 Guía Rápida de Despliegue:
+
+1. **Configurar el entorno:**
+   ```bash
+   cp .env.example .env
+   ```
+   *Edita el archivo `.env` agregando tu clave privada y variables necesarias.*
+
+2. **Ejecutar el script de despliegue en la red de Monad:**
+   ```bash
+   forge script script/DeployMiningRegistry.s.sol --rpc-url monad_testnet --broadcast --legacy --ffi
+   ```
+
+3. **Historial de Despliegues:**
+   Los artefactos de la transacción y dirección del contrato quedan registrados en la carpeta `deployments/`:
+   * Ver archivo de despliegue: [deployments/10143.json](file:///data/data/com.termux/files/home/Projects/termux-monad-mining-contracts/deployments/10143.json) (Red Monad Testnet).
+
+---
+
+## ⚡ Comandos de Control Rápidos
+
+| Acción | Comando | Descripción |
+|---|---|---|
+| 🔨 **Compilar** | `forge compile` | Compila los contratos inteligentes |
+| 🧪 **Testear** | `forge test` | Corre la suite completa de pruebas unitarias |
+| 🧽 **Limpiar** | `forge clean` | Elimina la caché y archivos generados |
+| 📝 **Formatear** | `make format` | Da formato a Solidity y scripts de JS |
+| 🚀 **ABIs** | `npm run generate-abis` | Exporta las ABIs estructuradas para TypeScript |
+
+---
+
+## 🤝 Créditos y Agradecimientos
+
+Este proyecto es una adaptación y extensión del trabajo original de varios desarrolladores:
+
+* **[Sergio (Ser911af)](https://github.com/Ser911af)** 👑 - Autor original del contrato y repositorio base [monad-mining-registry](https://github.com/Ser911af/monad-mining-registry).
+* **[Salomé (DvvSalome)](https://github.com/DvvSalome)** ✨ - Participante y colaboradora clave en el proyecto original.
+* **[kuromi04](https://github.com/kuromi04)** 📱 - Responsable de la adaptación completa para Termux en Android, portando la infraestructura de conexión, testing y despliegue para dispositivos móviles.
+
+---
+
+<p align="center">
+  <i>Desarrollado, verificado y desplegado con un <b>enfoque pionero</b> en la historia de la blockchain desde la terminal de <b>Termux con Android</b>. 🦾</i>
+</p>
